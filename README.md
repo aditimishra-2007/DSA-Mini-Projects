@@ -1,64 +1,96 @@
-# DSA Mini Projects — C++
+# Campus Route Finder Using Graphs
 
-This repository contains two Data Structures and Algorithms (DSA) mini projects.
+## Project overview
+This C++ mini project represents campus locations as vertices and paths as undirected edges. It uses an adjacency list, Breadth-First Search (BFS), and Depth-First Search (DFS).
 
-## Projects
+## Requirements covered
+- 9 campus locations (more than the required 8)
+- Adjacency-list graph representation
+- BFS shortest route for an unweighted graph
+- DFS traversal of reachable locations
+- User-selected source and destination
+- Disconnected-location detection
+- Three example test cases
+- Time and space complexity explanation
 
-### 1. Campus Route Finder Using Graphs
-A campus navigation program that represents locations as vertices and paths as edges. It uses an adjacency list, Breadth-First Search (BFS), and Depth-First Search (DFS) to explore locations and find a route with the minimum number of edges.
+## Locations
+Main Gate, Library, Block 1, Block 2, Cafeteria, Auditorium, Parking, Lab, Hostel.
 
-**Folder:** `Campus_Route_Finder_Graphs/`
+Hostel is intentionally isolated to demonstrate an unreachable destination.
 
-### 2. Student Record Search System Using Trees
-A student record management program implemented with a Binary Search Tree (BST). It supports insertion, searching, deletion, and inorder, preorder, and postorder traversals.
-
-**Folder:** `Student_Record_Search_BST/`
-
-## Folder structure
-
-```text
-DSA-Mini-Projects/
-├── README.md
-├── Campus_Route_Finder_Graphs/
-│   ├── main.cpp
-│   ├── README.md
-│   └── REPORT.md
-└── Student_Record_Search_BST/
-    ├── main.cpp
-    ├── README.md
-    └── REPORT.md
-```
-
-## Requirements
-
-- C++ compiler (g++ recommended)
-- Campus Route Finder: C++11 or later
-- Student Record Search System: C++14 or later
-
-## Compile and run
-
-Open the required project folder in a terminal.
-
-For Campus Route Finder:
+## How to compile and run
+Using g++:
 
 ```bash
 g++ main.cpp -o campus_route
 ./campus_route
 ```
 
-For Student Record Search System:
+On Windows, run:
 
 ```bash
-g++ main.cpp -o student_records
-./student_records
+g++ main.cpp -o campus_route.exe
+campus_route.exe
 ```
 
-On Windows, run the generated `.exe` file instead.
+## How to use
+1. Run the program.
+2. Choose option 1 to see the exact location names.
+3. Choose option 3 to find a shortest route using BFS.
+4. Choose option 4 to see reachable locations using DFS.
+5. Choose option 5 to identify locations not reachable from a selected start.
+6. Choose option 0 to exit.
 
-## Documentation
+Enter location names exactly as displayed, including spaces and capital letters.
 
-Each project folder contains its own README and report describing the program, operations, test cases, and complexity.
+## Sample test cases
 
-## Important submission note
+### Test 1: Direct route
+- Menu choice: 3
+- Source: Main Gate
+- Destination: Library
+- Expected: `Main Gate -> Library`
+- Expected number of edges: `1`
 
-Run both programs with a C++ compiler and capture genuine screenshots of their outputs. Add those screenshots to the relevant project folder before final submission. Do not use sample or illustrative images as proof of program execution.
+### Test 2: Multi-stop route
+- Menu choice: 3
+- Source: Main Gate
+- Destination: Auditorium
+- Expected: A shortest route with 3 edges, such as `Main Gate -> Library -> Cafeteria -> Auditorium`.
+- Note: BFS finds a route with the minimum number of edges. If multiple shortest routes exist, the exact route can depend on adjacency order.
+
+### Test 3: Unreachable destination
+- Menu choice: 3
+- Source: Main Gate
+- Destination: Hostel
+- Expected: `No route exists between Main Gate and Hostel.`
+
+## Algorithms and complexity
+
+Let V be the number of vertices (locations) and E be the number of edges (paths).
+
+| Operation | Time complexity | Extra space |
+|---|---:|---:|
+| BFS using adjacency list | O(V + E) | O(V) |
+| DFS using adjacency list | O(V + E) | O(V) |
+| Adjacency-list storage | — | O(V + E) |
+
+BFS uses a queue and visits vertices level by level. In an unweighted graph, the first route found to a destination uses the minimum number of edges. The parent array is used to reconstruct that route.
+
+DFS uses a stack and explores one path as far as possible before backtracking.
+
+## Adjacency list vs adjacency matrix
+
+| Feature | Adjacency list | Adjacency matrix |
+|---|---|---|
+| Space | O(V + E) | O(V²) |
+| Check whether an edge exists | O(degree of vertex) | O(1) |
+| Iterate over neighbors | Efficient | O(V) per vertex |
+| Best suited for | Sparse graphs | Dense graphs |
+
+## Files
+- `main.cpp` — complete source code
+- `README.md` — project explanation, instructions, test cases, and complexity
+
+## GitHub upload
+Create a new public repository named `Campus-Route-Finder-Graphs`, then upload `main.cpp` and `README.md`.
